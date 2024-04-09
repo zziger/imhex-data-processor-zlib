@@ -35,7 +35,7 @@ jobs:
             ..
           cmake --build .
           cmake --install .
-            mv install/imhex_data_processor_zlib.hexplug install/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_windows.hexplug
+          mv ./install/imhex_data_processor_zlib.hexplug install/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_windows.hexplug
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -72,7 +72,7 @@ jobs:
             ..
           cmake --build .
           cmake --install .
-          mv install/imhex_data_processor_zlib.hexplug install/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_macos.hexplug
+          mv ./install/imhex_data_processor_zlib.hexplug ./install/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_macos.hexplug
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
