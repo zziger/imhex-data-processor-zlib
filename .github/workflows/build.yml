@@ -80,6 +80,7 @@ jobs:
           path: build/install
 
   publish:
+    needs: [win, macos]
     runs-on: ubuntu-latest
     name: Publish
     steps:
