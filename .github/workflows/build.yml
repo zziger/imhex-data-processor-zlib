@@ -1,5 +1,11 @@
 name: Build
-on: [push]
+on:
+  push:
+    tags:
+      - '*.*'
+
+env:
+  IMHEX_VERSION: v1.33.2
 
 jobs:
   win:
@@ -15,7 +21,7 @@ jobs:
           submodules: recursive
       - name: Install SDK
         id: install_sdk
-        uses: WerWolv/imhex-download-sdk@v1.33.2
+        uses: WerWolv/imhex-download-sdk@${{ env.IMHEX_VERSION }}
       - name: Build
         run: |
           mkdir build
@@ -27,6 +33,7 @@ jobs:
             ..
           cmake --build .
           cmake --install .
+            mv install/imhex_data_processor_zlib.hexplug install/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_windows.hexplug
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -45,7 +52,7 @@ jobs:
           submodules: recursive
       - name: Install SDK
         id: install_sdk
-        uses: WerWolv/imhex-download-sdk@v1.33.2
+        uses: WerWolv/imhex-download-sdk@${{ env.IMHEX_VERSION }}
       - name: Build
         run: |
           mkdir build
@@ -63,8 +70,28 @@ jobs:
             ..
           cmake --build .
           cmake --install .
+          mv install/imhex_data_processor_zlib.hexplug install/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_macos.hexplug
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-build
           path: build/install
+
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "${{ github.ref_name }} - ImHex ${{ env.IMHEX_VERSION }}"
+          generate_release_notes: true
+          files: |
+            ./windows-build/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_windows.hexplug
+            ./macos-build/imhex_${{ env.IMHEX_VERSION }}_data_processor_zlib_macos.hexplug
