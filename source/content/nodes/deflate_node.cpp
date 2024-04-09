@@ -1,4 +1,4 @@
-#include <format>
+#include <fmt/format.h>
 #include <hex/api/content_registry.hpp>
 #include <hex/api/localization_manager.hpp>
 #include <hex/helpers/utils.hpp>
@@ -58,13 +58,13 @@ namespace hex::plugin::data_processor_zlib
 
                 switch (status) {
                 case Z_NEED_DICT:
-                    throwNodeError(std::format("Provided stream requires zdict (not supported)"));
+                    throwNodeError(fmt::format("Provided stream requires zdict (not supported)"));
                 case Z_DATA_ERROR:
-                    throwNodeError(std::format("Zlib data error: {}", stream.msg == nullptr ? "(null)" : stream.msg));
+                    throwNodeError(fmt::format("Zlib data error: {}", stream.msg == nullptr ? "(null)" : stream.msg));
                 case Z_MEM_ERROR:
-                    throwNodeError(std::format("Zlib memory error: {}", stream.msg == nullptr ? "(null)" : stream.msg));
+                    throwNodeError(fmt::format("Zlib memory error: {}", stream.msg == nullptr ? "(null)" : stream.msg));
                 case Z_STREAM_ERROR:
-                    throwNodeError(std::format("Zlib stream error: {}", stream.msg == nullptr ? "(null)" : stream.msg));
+                    throwNodeError(fmt::format("Zlib stream error: {}", stream.msg == nullptr ? "(null)" : stream.msg));
                 default:
                     break;
                 }
