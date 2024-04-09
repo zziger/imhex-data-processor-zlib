@@ -5,6 +5,8 @@ on:
       - '*.*'
 
 env:
+  # Since GitHub does not allow to use envs in `uses` field,
+  # make sure to replace version there too.
   IMHEX_VERSION: v1.33.2
 
 jobs:
@@ -21,7 +23,7 @@ jobs:
           submodules: recursive
       - name: Install SDK
         id: install_sdk
-        uses: WerWolv/imhex-download-sdk@${{ env.IMHEX_VERSION }}
+        uses: WerWolv/imhex-download-sdk@v1.33.2
       - name: Build
         run: |
           mkdir build
@@ -52,7 +54,7 @@ jobs:
           submodules: recursive
       - name: Install SDK
         id: install_sdk
-        uses: WerWolv/imhex-download-sdk@${{ env.IMHEX_VERSION }}
+        uses: WerWolv/imhex-download-sdk@v1.33.2
       - name: Build
         run: |
           mkdir build
