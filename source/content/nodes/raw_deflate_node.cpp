@@ -8,11 +8,11 @@
 
 namespace hex::plugin::data_processor_zlib
 {
-    class NodeZlibDeflate final : public dp::Node
+    class NodeDecompressRawDeflate final : public dp::Node
     {
         static constexpr size_t CHUNK_SIZE = 16384;
     public:
-        NodeZlibDeflate() : Node("zziger.data_processor_zlib.nodes.deflate.header",
+        NodeDecompressRawDeflate() : Node("zziger.data_processor_zlib.nodes.raw_deflate.header",
                                      {
                                          dp::Attribute(dp::Attribute::IOType::In, dp::Attribute::Type::Buffer, "hex.builtin.nodes.common.input"),
                                          dp::Attribute(dp::Attribute::IOType::Out, dp::Attribute::Type::Buffer, "hex.builtin.nodes.common.output")
@@ -42,7 +42,7 @@ namespace hex::plugin::data_processor_zlib
             stream.avail_in = 0;
             stream.next_in = nullptr;
 
-            int status = inflateInit(&stream);
+            int status = inflateInit2(&stream, -15);
             if (status != Z_OK)
                 throwNodeError("Failed to initialize Zlib");
 
@@ -78,8 +78,8 @@ namespace hex::plugin::data_processor_zlib
         }
     };
 
-    void registerDeflateNode()
+    void registerRawDeflateNode()
     {
-        ContentRegistry::DataProcessorNode::add<NodeZlibDeflate>("zziger.data_processor_zlib.nodes.decompression", "zziger.data_processor_zlib.nodes.deflate.header");
+        ContentRegistry::DataProcessorNode::add<NodeDecompressRawDeflate>("zziger.data_processor_zlib.nodes.decompression", "zziger.data_processor_zlib.nodes.raw_deflate");
     }
 }

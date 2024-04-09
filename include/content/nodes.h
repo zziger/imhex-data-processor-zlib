@@ -1,3 +1,4 @@
 namespace hex::plugin::data_processor_zlib {
-    void registerDeflateNode();
+    void registerZlibNode();
+    void registerRawDeflateNode();
 }

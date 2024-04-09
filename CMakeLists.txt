@@ -15,7 +15,8 @@ add_imhex_plugin(
         imhex_data_processor_zlib
     SOURCES
         source/main.cpp
-        source/content/nodes/deflate_node.cpp
+        source/content/nodes/zlib_node.cpp
+        source/content/nodes/raw_deflate_node.cpp
     INCLUDES
         include
     LIBRARIES

@@ -4,7 +4,10 @@
   "country": "United States",
   "fallback": true,
   "translations": {
-    "zziger.data_processor_zlib.nodes.deflate.header": "Deflate",
+    "zziger.data_processor_zlib.nodes.zlib.header": "Decompress Zlib",
+    "zziger.data_processor_zlib.nodes.raw_deflate.header": "Decompress raw deflate",
+    "zziger.data_processor_zlib.nodes.zlib": "Zlib",
+    "zziger.data_processor_zlib.nodes.raw_deflate": "Raw deflate",
     "zziger.data_processor_zlib.nodes.decompression": "Decompression"
   }
 }

@@ -7,6 +7,8 @@ IMHEX_PLUGIN_SETUP("ImHex Data processor Zlib", "zziger", "Adds Zlib nodes to th
     hex::log::debug("Using romfs: '{}'", romfs::name());
     for (auto &path : romfs::list("lang"))
         hex::ContentRegistry::Language::addLocalization(nlohmann::json::parse(romfs::get(path).string()));
+    using namespace hex::plugin::data_processor_zlib;
 
-    hex::plugin::data_processor_zlib::registerDeflateNode();
+    registerZlibNode();
+    registerRawDeflateNode();
 }
