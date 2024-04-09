@@ -1,0 +1,10 @@
+{
+  "code": "en-US",
+  "language": "English",
+  "country": "United States",
+  "fallback": true,
+  "translations": {
+    "zziger.data_processor_zlib.nodes.deflate.header": "Deflate",
+    "zziger.data_processor_zlib.nodes.decompression": "Decompression"
+  }
+}
